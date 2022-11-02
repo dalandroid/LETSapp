@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/btm_list"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_view_list_24"
+        android:title="LIST"/>
+
+    <item
+        android:id="@+id/btm_map"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_map_24"
+        android:title="MAP"/>
+
+    <item
+        android:id="@+id/btm_party"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_group_24"
+        android:title="PARTY"/>
+
+    <item
+        android:id="@+id/btm_favor"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="FAVOR"/>
+
+    <item
+        android:id="@+id/btm_tools"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_more_horiz_24"
+        android:title="MORE"/>
+
+
+</menu>
