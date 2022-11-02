@@ -3,7 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android/LETSapp/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/Android/LETSapp/app/src/main/res/layout/activity_intro.xml" value="0.31244444444444447" />
+        <entry key="..\:/Android/LETSapp/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Android/LETSapp/app/src/main/res/layout/fragment_navi_list.xml" value="0.25" />
         <entry key="..\:/Android/LETSapp/app/src/main/res/layout/recycler_main_item_list.xml" value="0.36614583333333334" />
       </map>
