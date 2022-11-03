@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="345dp"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="8dp"
+    android:layout_margin="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/api_iv"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/bg_one01"
+            android:padding="1dp"
+            android:background="#CDCDCD"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:id="@+id/api_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/api_iv"
+            android:text="테니스장1 (금,토,일)"
+            android:fontFamily="@font/kmi_bold"
+            android:textColor="@color/black"
+            android:layout_marginLeft="15dp"
+            android:maxWidth="200dp"/>
+
+        <TextView
+            android:id="@+id/api_loca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="성동구"
+            android:layout_alignLeft="@+id/api_title"
+            android:layout_below="@+id/api_title"
+            android:fontFamily="@font/gmarketmedium"
+            android:textSize="12sp"
+            android:layout_marginTop="6dp"/>
+
+        <TextView
+            android:id="@+id/api_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="접수중"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/api_title"
+            android:fontFamily="@font/kmi_bold"
+            android:textColor="@color/blue"
+            android:letterSpacing="0.1"/>
+
+        <ImageView
+            android:id="@+id/api_favor"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_favor_false"
+            android:layout_alignBottom="@+id/api_state"
+            android:layout_toLeftOf="@+id/api_count"
+            android:layout_marginRight="4dp"/>
+
+        <TextView
+            android:id="@+id/api_count"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/api_state"
+            android:layout_alignParentRight="true"
+            android:text="0"
+            android:textColor="@color/red"/>
+
+
+
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

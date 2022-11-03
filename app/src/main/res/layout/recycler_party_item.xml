@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="340dp"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="4dp"
+    android:elevation="10dp"
+    app:cardCornerRadius="12dp"
+    android:layout_gravity="center_horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="12dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:fontFamily="@font/kmi_bold"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:layout_marginTop="8dp"
+            android:maxWidth="250dp"/>
+
+        <TextView
+            android:id="@+id/loca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="장 소 : 성동구 농구장"
+            android:layout_below="@+id/title"
+            android:layout_marginTop="8dp"
+            android:textColor="#777777"
+            android:fontFamily="@font/dalseo"
+            android:letterSpacing="0.08"/>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시 간 : 2022년 10월 18일"
+            android:layout_below="@+id/loca"
+            android:layout_marginTop="8dp"
+            android:textColor="#777777"
+            android:fontFamily="@font/dalseo"
+            android:letterSpacing="0.08"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="파티장 : Lv3 홍길동"
+            android:fontFamily="@font/dalseo"
+            android:textColor="#3F51B5"
+            android:maxWidth="150dp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="80dp"
+            android:layout_height="42dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="#003EFB"
+            android:enabled="true"
+            android:text="1/10" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="참가"
+            android:layout_above="@+id/btn"
+            android:layout_alignLeft="@+id/btn"
+            android:layout_marginLeft="30dp"
+            android:textSize="12sp"/>
+
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

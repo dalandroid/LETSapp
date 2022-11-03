@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class NaviListFragment : Fragment() {
 
-    val items:ArrayList<Item> = ArrayList()
+    var items:MutableList<Item> = ArrayList()
     lateinit var recyclerView: RecyclerView
     lateinit var switch: Switch
 
