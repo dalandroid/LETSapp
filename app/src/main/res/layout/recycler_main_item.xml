@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
-    android:layout_marginVertical="4dp">
+    android:layout_marginVertical="4dp"
+    android:id="@+id/card_view">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,8 +17,8 @@
             android:id="@+id/recycler_iv"
             android:layout_width="110dp"
             android:layout_height="130dp"
-            android:src="@drawable/bg_one01"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_one01" />
 
         <TextView
             android:id="@+id/recycler_tv"

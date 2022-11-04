@@ -30,6 +30,10 @@ class APIAdapter constructor(val context: Context, var items:MutableList<ItemAPI
         holder.binding.apiState.text=items[position].state
         Glide.with(context).load(items[position].imgId).into(holder.binding.apiIv)
 
+        holder.binding.root.setOnClickListener{
+
+        }
+
     }
     override fun getItemCount(): Int =items.size
 

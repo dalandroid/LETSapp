@@ -59,10 +59,10 @@
                 android:layout_width="120dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="16dp"
+                android:background="@drawable/round_spinner"
                 android:entries="@array/gu"
                 android:prompt="@string/event"
-                android:spinnerMode="dropdown"
-                android:background="@drawable/round_spinner" />
+                android:spinnerMode="dropdown" />
 
             <Spinner
                 android:id="@+id/spinner_2"
@@ -98,8 +98,8 @@
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
             android:orientation="vertical"
-            android:paddingLeft="20dp"
             android:paddingVertical="4dp"
+            android:paddingLeft="20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 

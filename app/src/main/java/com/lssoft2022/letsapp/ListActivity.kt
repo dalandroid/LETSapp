@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatSpinner
 import com.lssoft2022.letsapp.databinding.ActivityListBinding
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.lang.reflect.Field
 
 class ListActivity : AppCompatActivity() {
@@ -31,7 +34,11 @@ class ListActivity : AppCompatActivity() {
 
         binding.tvToolbar.text=categoryTitle[category]
 
+        searchItem()
+
         binding.recyclerView.adapter=APIAdapter(this,items)
+
+
 
         // -----------------------------------spinner 1-----------------------------------------
         binding.spinner1.adapter= ArrayAdapter.createFromResource(this,R.array.gu,R.layout.spinner_selected)
@@ -116,6 +123,15 @@ class ListActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         loadDB()
+    }
+
+    private fun searchItem(){
+        val retrofit: Retrofit=Retrofit.Builder()
+            .baseUrl("http://openAPI.seoul.go.kr:8088")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
     }
 
     private fun loadDB(){

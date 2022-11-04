@@ -46,12 +46,12 @@ class NaviListFragment : Fragment() {
         return rootView
     }
 
-        override fun onResume() {
+    override fun onResume() {
         super.onResume()
         loadDB()
     }
 
-        private fun loadDB(){
+    private fun loadDB(){
         items.clear()
         recyclerView.adapter?.notifyDataSetChanged()
 
@@ -73,4 +73,5 @@ class NaviListFragment : Fragment() {
 
         recyclerView.adapter?.notifyDataSetChanged()
     }
+
 }
