@@ -1,11 +1,14 @@
 package com.lssoft2022.letsapp
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.lssoft2022.letsapp.databinding.RecyclerApilistItemBinding
@@ -31,6 +34,8 @@ class APIAdapter constructor(val context: Context, var items:MutableList<ItemAPI
         Glide.with(context).load(items[position].imgId).into(holder.binding.apiIv)
 
         holder.binding.root.setOnClickListener{
+            val intent:Intent = Intent(context, ItemSelectActivity::class.java)
+            ContextCompat.startActivity(context, intent, Bundle())
 
         }
 
