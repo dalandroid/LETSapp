@@ -20,9 +20,10 @@
 
             <ImageView
                 android:id="@+id/iv"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_centerVertical="true"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_edit_24" />
 
 
             <TextView
@@ -30,13 +31,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="24dp"
+                android:layout_marginLeft="12dp"
                 android:layout_toRightOf="@+id/iv"
                 android:fontFamily="@font/dalseo"
                 android:text="게시글 작성"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp" />
-
 
 
         </RelativeLayout>
@@ -49,6 +49,143 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
         android:background="@drawable/round">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="장 소"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_marginTop="26dp"
+            android:layout_marginLeft="40dp"/>
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_spinner"
+            android:hint="제 목"
+            android:padding="10dp"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="장 소"
+            android:textColor="@color/black"
+            android:layout_below="@+id/et_title"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="40dp"/>
+
+        <EditText
+            android:id="@+id/et_place"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_place"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_spinner"
+            android:hint="장소를 입력해주세요"
+            android:padding="10dp"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="날 짜"
+            android:textColor="@color/black"
+            android:layout_below="@+id/et_place"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="40dp"/>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/date"
+            android:layout_alignLeft="@+id/et_title"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_spinner"
+            android:padding="10dp"
+            android:text="날짜 선택"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시 간"
+            android:textColor="@color/black"
+            android:layout_below="@+id/et_place"
+            android:layout_alignLeft="@+id/tv_time"
+            android:textSize="18sp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/date"
+            android:layout_alignRight="@+id/et_title"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_spinner"
+            android:padding="10dp"
+            android:text="시간 선택"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="인 원"
+            android:textColor="@color/black"
+            android:layout_below="@+id/tv_date"
+            android:layout_alignRight="@+id/date"
+            android:textSize="18sp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"/>
+
+        <Spinner
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="@drawable/round_spinner"
+            android:layout_below="@+id/num"
+            android:layout_marginTop="8dp"
+            android:layout_alignLeft="@id/et_title"/>
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="#7E7E7E"
+            android:fontFamily="@font/gmarketmedium"
+            android:letterSpacing="0.15"
+            android:text="취 소" />
+
+        <Button
+            android:id="@+id/btn_complete"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="37dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="#004ABC"
+            android:fontFamily="@font/gmarketmedium"
+            android:letterSpacing="0.15"
+            android:text="작성 완료" />
 
 
     </RelativeLayout>

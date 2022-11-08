@@ -3,12 +3,18 @@ package com.lssoft2022.letsapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.recyclerview.widget.RecyclerView
 import com.lssoft2022.letsapp.databinding.ActivityListBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -21,8 +27,17 @@ class ListActivity : AppCompatActivity() {
     var categoryTitle:Array<String> = arrayOf("축구장", "풋살장", "족구장", "야구장", "테니스장", "농구장", "배구장", "경기장","운동장","체육관",
         "배드민턴장","탁구장","교육시설","수영장","골프장")
 
-    var items:MutableList<ItemAPI> = ArrayList()
-    
+    var list: MutableList<ApiDto> = ArrayList()
+    var filter_items:MutableList<ApiDto> = ArrayList()
+
+    var sp1_isCheck:Boolean=false
+    var sp2_isCheck:Boolean=false
+    var sp3_isCheck:Boolean=false
+
+    lateinit var str1:String
+    lateinit var str2:String
+    lateinit var str3:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityListBinding.inflate(layoutInflater)
@@ -36,7 +51,7 @@ class ListActivity : AppCompatActivity() {
 
         searchItem()
 
-        binding.recyclerView.adapter=APIAdapter(this,items)
+        binding.recyclerView.adapter=APIAdapter(this,list)
 
 
 
@@ -55,8 +70,32 @@ class ListActivity : AppCompatActivity() {
 
         binding.spinner1.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                when(p2){
-
+                var str:String=binding.spinner1.selectedItem.toString()
+                if(p2==0){
+                    binding.recyclerView.adapter=APIAdapter(this@ListActivity,list)
+                    sp1_isCheck=false
+                }else{
+                    sp1_isCheck=true
+                    filter_items.clear()
+                    for(i in 0 until list.size){
+                        if(list[i].area.equals(str)){
+                            filter_items.add(ApiDto(
+                                list[i].imgurl,
+                                list[i].title,
+                                list[i].target,
+                                list[i].area,
+                                list[i].place,
+                                list[i].v_min,
+                                list[i].v_max,
+                                list[i].pay,
+                                list[i].state,
+                                list[i].x,
+                                list[i].y,
+                                list[i].site,
+                            ))
+                        }
+                    }
+                    binding.recyclerView.adapter=APIAdapter(this@ListActivity,filter_items)
                 }
             }
 
@@ -132,20 +171,57 @@ class ListActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
+        val retrofitService=retrofit.create(ApiRetrofitService::class.java)
+
+        retrofitService.getApiList().enqueue(object :Callback<ApiResponse>{
+            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
+                val apiResponse=response.body()
+                list= apiResponse!!.apiResult!!.ApiList
+
+                binding.recyclerView.adapter=APIAdapter(this@ListActivity,list)
+            }
+
+            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+                Toast.makeText(this@ListActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
     }
 
     private fun loadDB(){
-        items.clear()
         binding.recyclerView.adapter?.notifyDataSetChanged()
 
-        items.add(ItemAPI(R.drawable.pic1,"a","성동구","접수중"))
-        items.add(ItemAPI(R.drawable.pic2,"b","성동구","접수마감"))
-        items.add(ItemAPI(R.drawable.pic3,"c","성동구","접수마감"))
-        items.add(ItemAPI(R.drawable.pic1,"a","성동구","접수중"))
-        items.add(ItemAPI(R.drawable.pic2,"b","성동구","접수마감"))
-        items.add(ItemAPI(R.drawable.pic3,"c","성동구","접수마감"))
+//        list_items.add(ItemAPI(R.drawable.pic1,"a","성동구","접수중"))
+//        list_items.add(ItemAPI(R.drawable.pic2,"b","성동구","접수마감"))
+//        list_items.add(ItemAPI(R.drawable.pic3,"c","성동구","접수마감"))
+//        list_items.add(ItemAPI(R.drawable.pic1,"a","성동구","접수중"))
+//        list_items.add(ItemAPI(R.drawable.pic2,"b","성동구","접수마감"))
+//        list_items.add(ItemAPI(R.drawable.pic3,"c","성동구","접수마감"))
 
         binding.recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    fun make_clone(){
+//        for(i in 0 until list.size){
+//            if(list[i].area.equals(str)){
+//                filter_items.add(ApiDto(
+//                    list[i].imgurl,
+//                    list[i].title,
+//                    list[i].target,
+//                    list[i].area,
+//                    list[i].place,
+//                    list[i].v_min,
+//                    list[i].v_max,
+//                    list[i].pay,
+//                    list[i].state,
+//                    list[i].x,
+//                    list[i].y,
+//                    list[i].site,
+//                ))
+//            }
+//        }
+
     }
 
 }

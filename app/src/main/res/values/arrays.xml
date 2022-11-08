@@ -53,6 +53,7 @@
         <item>접수상태</item>
         <item>접수중</item>
         <item>접수마감</item>
+        <item>예약마감</item>
     </string-array>
 
     <string-array name="price">

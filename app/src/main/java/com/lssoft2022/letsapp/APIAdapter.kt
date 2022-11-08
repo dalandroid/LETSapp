@@ -15,7 +15,7 @@ import com.lssoft2022.letsapp.databinding.RecyclerApilistItemBinding
 import com.lssoft2022.letsapp.databinding.RecyclerMainItemBinding
 import com.lssoft2022.letsapp.databinding.RecyclerPartyItemBinding
 
-class APIAdapter constructor(val context: Context, var items:MutableList<ItemAPI>): RecyclerView.Adapter<APIAdapter.VH>() {
+class APIAdapter constructor(val context: Context, var items:MutableList<ApiDto>): RecyclerView.Adapter<APIAdapter.VH>() {
 
     inner class VH constructor(itemView:View):RecyclerView.ViewHolder(itemView){
         val binding:RecyclerApilistItemBinding=RecyclerApilistItemBinding.bind(itemView)
@@ -29,9 +29,9 @@ class APIAdapter constructor(val context: Context, var items:MutableList<ItemAPI
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.binding.apiTitle.text=items[position].title
-        holder.binding.apiLoca.text=items[position].loca
+        holder.binding.apiLoca.text=items[position].area
         holder.binding.apiState.text=items[position].state
-        Glide.with(context).load(items[position].imgId).into(holder.binding.apiIv)
+        Glide.with(context).load(items[position].imgurl).error(R.drawable.blank).into(holder.binding.apiIv)
 
         holder.binding.root.setOnClickListener{
             val intent:Intent = Intent(context, ItemSelectActivity::class.java)

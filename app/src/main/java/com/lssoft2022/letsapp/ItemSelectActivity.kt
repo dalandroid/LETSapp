@@ -1,28 +1,28 @@
 package com.lssoft2022.letsapp
 
+import android.content.Intent
 import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ImageView
+import com.lssoft2022.letsapp.databinding.ActivityItemSelectBinding
 
 class ItemSelectActivity : AppCompatActivity() {
 
-    lateinit var back:ImageView
-    lateinit var toEdit:Button
+    val binding:ActivityItemSelectBinding by lazy { ActivityItemSelectBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_item_select)
+        setContentView(binding.root)
 
-        back=findViewById<ImageView>(R.id.iv_back)
-        back.setOnClickListener{
-            finish()
-        }
-        toEdit=findViewById<Button>(R.id.btn_toEdit)
-        toEdit.setOnClickListener{
-
+        binding.ivBack.setOnClickListener { finish() }
+        binding.btnToEdit.setOnClickListener {
+            val intent:Intent=Intent(this@ItemSelectActivity,EditActivity::class.java)
+            startActivity(intent)
         }
 
-    }
+        }
+
 }

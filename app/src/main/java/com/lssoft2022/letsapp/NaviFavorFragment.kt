@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class NaviFavorFragment : Fragment() {
 
-    var items:MutableList<ItemAPI> = ArrayList()
+    var items:MutableList<ApiDto> = ArrayList()
     lateinit var recyclerView:RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -28,16 +28,16 @@ class NaviFavorFragment : Fragment() {
     }
 
     private fun loadDB(){
-        items.clear()
-        recyclerView.adapter?.notifyDataSetChanged()
-
-        items.add(ItemAPI(R.drawable.pic1,"a","성동구","접수중"))
-        items.add(ItemAPI(R.drawable.pic2,"b","성동구","접수마감"))
-        items.add(ItemAPI(R.drawable.pic3,"c","성동구","접수마감"))
-        items.add(ItemAPI(R.drawable.pic1,"a","성동구","접수중"))
-        items.add(ItemAPI(R.drawable.pic2,"b","성동구","접수마감"))
-        items.add(ItemAPI(R.drawable.pic3,"c","성동구","접수마감"))
-
-        recyclerView.adapter?.notifyDataSetChanged()
+//        items.clear()
+//        recyclerView.adapter?.notifyDataSetChanged()
+//
+//        items.add(ItemAPI(R.drawable.pic1,"a","성동구","접수중"))
+//        items.add(ItemAPI(R.drawable.pic2,"b","성동구","접수마감"))
+//        items.add(ItemAPI(R.drawable.pic3,"c","성동구","접수마감"))
+//        items.add(ItemAPI(R.drawable.pic1,"a","성동구","접수중"))
+//        items.add(ItemAPI(R.drawable.pic2,"b","성동구","접수마감"))
+//        items.add(ItemAPI(R.drawable.pic3,"c","성동구","접수마감"))
+//
+//        recyclerView.adapter?.notifyDataSetChanged()
     }
 }

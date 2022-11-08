@@ -26,23 +26,27 @@
             android:id="@+id/api_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/api_iv"
-            android:text="테니스장1 (금,토,일)"
-            android:fontFamily="@font/kmi_bold"
-            android:textColor="@color/black"
             android:layout_marginLeft="15dp"
-            android:maxWidth="200dp"/>
+            android:layout_toRightOf="@+id/api_iv"
+            android:fontFamily="@font/kmi_bold"
+            android:maxWidth="200dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="테니스장1 (금,토,일)"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/api_loca"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="성동구"
-            android:layout_alignLeft="@+id/api_title"
             android:layout_below="@+id/api_title"
+            android:layout_alignLeft="@+id/api_title"
+            android:layout_marginTop="6dp"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:fontFamily="@font/gmarketmedium"
-            android:textSize="12sp"
-            android:layout_marginTop="6dp"/>
+            android:text="성동구"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/api_state"
