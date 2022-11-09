@@ -54,11 +54,11 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="장 소"
-            android:textColor="@color/black"
-            android:textSize="18sp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="26dp"
-            android:layout_marginLeft="40dp"/>
+            android:text="제 목"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/et_title"
@@ -155,12 +155,13 @@
             android:layout_marginTop="16dp"/>
 
         <Spinner
+            android:id="@+id/spinner"
             android:layout_width="200dp"
             android:layout_height="40dp"
-            android:background="@drawable/round_spinner"
             android:layout_below="@+id/num"
+            android:layout_alignLeft="@id/et_title"
             android:layout_marginTop="8dp"
-            android:layout_alignLeft="@id/et_title"/>
+            android:background="@drawable/round_spinner" />
 
         <Button
             android:id="@+id/btn_cancel"

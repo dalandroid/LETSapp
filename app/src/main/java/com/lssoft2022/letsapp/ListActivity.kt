@@ -70,33 +70,13 @@ class ListActivity : AppCompatActivity() {
 
         binding.spinner1.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                var str:String=binding.spinner1.selectedItem.toString()
-                if(p2==0){
+                if(p2==0 && !sp2_isCheck && !sp3_isCheck){
                     binding.recyclerView.adapter=APIAdapter(this@ListActivity,list)
                     sp1_isCheck=false
                 }else{
-                    sp1_isCheck=true
-                    filter_items.clear()
-                    for(i in 0 until list.size){
-                        if(list[i].area.equals(str)){
-                            filter_items.add(ApiDto(
-                                list[i].imgurl,
-                                list[i].title,
-                                list[i].target,
-                                list[i].area,
-                                list[i].place,
-                                list[i].v_min,
-                                list[i].v_max,
-                                list[i].pay,
-                                list[i].state,
-                                list[i].x,
-                                list[i].y,
-                                list[i].site,
-                            ))
-                        }
-                    }
-                    binding.recyclerView.adapter=APIAdapter(this@ListActivity,filter_items)
+                    makeFilter()
                 }
+
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -173,7 +153,7 @@ class ListActivity : AppCompatActivity() {
 
         val retrofitService=retrofit.create(ApiRetrofitService::class.java)
 
-        retrofitService.getApiList().enqueue(object :Callback<ApiResponse>{
+        retrofitService.getApiList(categoryTitle[category]).enqueue(object :Callback<ApiResponse>{
             override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                 val apiResponse=response.body()
                 list= apiResponse!!.apiResult!!.ApiList
@@ -190,38 +170,12 @@ class ListActivity : AppCompatActivity() {
     }
 
     private fun loadDB(){
-        binding.recyclerView.adapter?.notifyDataSetChanged()
-
-//        list_items.add(ItemAPI(R.drawable.pic1,"a","성동구","접수중"))
-//        list_items.add(ItemAPI(R.drawable.pic2,"b","성동구","접수마감"))
-//        list_items.add(ItemAPI(R.drawable.pic3,"c","성동구","접수마감"))
-//        list_items.add(ItemAPI(R.drawable.pic1,"a","성동구","접수중"))
-//        list_items.add(ItemAPI(R.drawable.pic2,"b","성동구","접수마감"))
-//        list_items.add(ItemAPI(R.drawable.pic3,"c","성동구","접수마감"))
 
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 
-    fun make_clone(){
-//        for(i in 0 until list.size){
-//            if(list[i].area.equals(str)){
-//                filter_items.add(ApiDto(
-//                    list[i].imgurl,
-//                    list[i].title,
-//                    list[i].target,
-//                    list[i].area,
-//                    list[i].place,
-//                    list[i].v_min,
-//                    list[i].v_max,
-//                    list[i].pay,
-//                    list[i].state,
-//                    list[i].x,
-//                    list[i].y,
-//                    list[i].site,
-//                ))
-//            }
-//        }
-
+    private fun makeFilter(){
+        
     }
 
 }

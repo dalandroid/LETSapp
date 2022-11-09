@@ -56,8 +56,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="540dp"
-        android:background="@drawable/round"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round">
 
         <TextView
             android:id="@+id/tv_title"
@@ -65,95 +65,118 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/suit_light"
+            android:ellipsize="end"
+            android:fontFamily="@font/gmarketmedium"
             android:maxWidth="300dp"
+            android:maxLines="2"
             android:text="제목줄"
             android:textColor="@color/black"
-            android:textSize="36sp" />
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="330dp"
+            android:layout_height="1dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_title"
+            android:background="#CACACA"
+            android:layout_marginTop="4dp"/>
 
         <TextView
             android:id="@+id/tv_target"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="대 상 : "
-            android:fontFamily="@font/suit_light"
-            android:textColor="@color/black"
+            android:layout_below="@+id/line"
             android:layout_marginLeft="30dp"
-            android:layout_below="@+id/tv_title"
             android:layout_marginTop="24dp"
-            android:textSize="18sp"/>
+            android:fontFamily="@font/gmarketmedium"
+            android:text="대 상 : "
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tv_period"
+            android:id="@+id/tv_tel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="이용기간 : "
-            android:fontFamily="@font/suit_light"
-            android:textColor="@color/black"
-            android:layout_marginLeft="30dp"
             android:layout_below="@+id/tv_target"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="24dp"
-            android:textSize="18sp"/>
+            android:fontFamily="@font/gmarketmedium"
+            android:text="전화번호 : "
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_region"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="지 역 : "
-            android:fontFamily="@font/suit_light"
-            android:textColor="@color/black"
+            android:layout_below="@+id/tv_tel"
             android:layout_marginLeft="30dp"
-            android:layout_below="@+id/tv_period"
             android:layout_marginTop="24dp"
-            android:textSize="18sp"/>
+            android:fontFamily="@font/gmarketmedium"
+            android:text="지 역 : "
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_loca"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="장 소 : "
-            android:fontFamily="@font/suit_light"
-            android:textColor="@color/black"
-            android:layout_marginLeft="30dp"
             android:layout_below="@+id/tv_region"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="24dp"
-            android:textSize="18sp"/>
+            android:fontFamily="@font/gmarketmedium"
+            android:text="장 소 : "
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="개장시간 : "
-            android:fontFamily="@font/suit_light"
-            android:textColor="@color/black"
-            android:layout_marginLeft="30dp"
             android:layout_below="@+id/tv_loca"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="24dp"
-            android:textSize="18sp"/>
+            android:fontFamily="@font/gmarketmedium"
+            android:text="개장시간 : "
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="예약요금 : "
-            android:fontFamily="@font/suit_light"
-            android:textColor="@color/black"
-            android:layout_marginLeft="30dp"
             android:layout_below="@+id/tv_time"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="24dp"
-            android:textSize="18sp"/>
+            android:fontFamily="@font/gmarketmedium"
+            android:text="예약요금 : "
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_price"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/gmarketmedium"
+            android:text="위 치 : "
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="위 치 : "
-            android:fontFamily="@font/suit_light"
-            android:textColor="@color/black"
-            android:layout_marginLeft="30dp"
             android:layout_below="@+id/tv_price"
+            android:layout_toRightOf="@+id/map"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="24dp"
-            android:textSize="18sp"/>
+            android:fontFamily="@font/gmarketmedium"
+            android:textColor="@color/blue"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/btn_toSite"

@@ -35,5 +35,7 @@ data class ApiDto (
     @SerializedName("Y")
     var y:Double?,
     @SerializedName("SVCURL")
-    var site:String?
+    var site:String?,
+    @SerializedName("TELNO")
+    var tel:String?
 )
