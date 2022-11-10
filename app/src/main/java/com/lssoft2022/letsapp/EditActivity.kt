@@ -2,13 +2,17 @@ package com.lssoft2022.letsapp
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatSpinner
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
 import com.lssoft2022.letsapp.databinding.ActivityEditBinding
 import java.lang.reflect.Field
 import java.util.*
@@ -20,12 +24,16 @@ class EditActivity : AppCompatActivity() {
 
     val binding:ActivityEditBinding by lazy { ActivityEditBinding.inflate(layoutInflater) }
 
+    lateinit var firebaseFirestore:FirebaseFirestore
+    lateinit var Ref:CollectionReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         val area =intent.getStringExtra("area")
         val place =intent.getStringExtra("place")
+        val title =intent.getStringExtra("title")
 
         binding.etPlace.setText("$area $place")
         binding.btnCancel.setOnClickListener{finish()}
@@ -58,6 +66,14 @@ class EditActivity : AppCompatActivity() {
                 binding.tvTime.text=timeString
             }
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE),true).show()
+        }
+        // ------------------------------------작성완료 버튼------------------------------------------------------
+        binding.btnComplete.setOnClickListener {
+
+            val intent:Intent=Intent(this@EditActivity,MainActivity::class.java)
+            intent.putExtra("fragment","party")
+            startActivity(intent)
+            finish()
         }
 
     }

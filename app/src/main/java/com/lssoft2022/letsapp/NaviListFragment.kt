@@ -65,11 +65,11 @@ class NaviListFragment : Fragment() {
         items.add(Item(R.drawable.pic8,"경기장"))
         items.add(Item(R.drawable.pic6,"운동장"))
         items.add(Item(R.drawable.pic6,"체육관"))
-        items.add(Item(R.drawable.pic6,"배드민턴장"))
-        items.add(Item(R.drawable.pic6,"탁구장"))
+        items.add(Item(R.drawable.pic11,"배드민턴장"))
+        items.add(Item(R.drawable.pic12,"탁구장"))
         items.add(Item(R.drawable.pic6,"교육시설"))
-        items.add(Item(R.drawable.pic6,"수영장"))
-        items.add(Item(R.drawable.pic6,"골프장"))
+        items.add(Item(R.drawable.pic14,"수영장"))
+        items.add(Item(R.drawable.pic15,"골프장"))
 
         recyclerView.adapter?.notifyDataSetChanged()
     }

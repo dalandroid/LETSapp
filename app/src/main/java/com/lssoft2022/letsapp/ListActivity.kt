@@ -74,6 +74,8 @@ class ListActivity : AppCompatActivity() {
                     binding.recyclerView.adapter=APIAdapter(this@ListActivity,list)
                     sp1_isCheck=false
                 }else{
+                    str1=binding.spinner1.selectedItem.toString()
+                    sp1_isCheck=true
                     makeFilter()
                 }
 
@@ -155,10 +157,20 @@ class ListActivity : AppCompatActivity() {
 
         retrofitService.getApiList(categoryTitle[category]).enqueue(object :Callback<ApiResponse>{
             override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
-                val apiResponse=response.body()
-                list= apiResponse!!.apiResult!!.ApiList
 
-                binding.recyclerView.adapter=APIAdapter(this@ListActivity,list)
+                if(response.body()!=null){
+                    val apiResponse=response.body()
+
+                    apiResponse?.apiResult?.ApiList?.let {
+                        binding.recyclerView.adapter=APIAdapter(this@ListActivity,it)
+                    }
+
+                }else{
+                    Toast.makeText(this@ListActivity, "에러", Toast.LENGTH_SHORT).show()
+                }
+
+
+
             }
 
             override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
@@ -175,7 +187,9 @@ class ListActivity : AppCompatActivity() {
     }
 
     private fun makeFilter(){
-        
+        if(sp1_isCheck && !sp2_isCheck && !sp3_isCheck){
+
+        }
     }
 
 }

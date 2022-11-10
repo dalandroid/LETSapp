@@ -47,6 +47,7 @@ class ItemSelectActivity : AppCompatActivity() {
             val intent:Intent=Intent(this@ItemSelectActivity,EditActivity::class.java)
             intent.putExtra("area",area)
             intent.putExtra("place",place)
+            intent.putExtra("title",title)
             startActivity(intent)
         }
         binding.btnToSite.setOnClickListener {

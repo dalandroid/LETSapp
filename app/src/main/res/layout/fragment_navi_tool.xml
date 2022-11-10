@@ -59,8 +59,8 @@
                 android:id="@+id/tool_civ"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/profile"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/profile" />
 
             <TextView
                 android:id="@+id/tool_tv_level"
@@ -92,8 +92,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
         </RelativeLayout>
 
         <TextView

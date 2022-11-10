@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "983833161758",
+    "project_id": "letsapp-177f8",
+    "storage_bucket": "letsapp-177f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983833161758:android:6cd5eaa3eec7796e037e0f",
+        "android_client_info": {
+          "package_name": "com.lssoft2022.letsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983833161758-qsdd9calr6qg59qur14mvad0enskohf6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTT4AMwFMu50h2VZKfE3Rl9P0CDyDkCoM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983833161758-qsdd9calr6qg59qur14mvad0enskohf6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
