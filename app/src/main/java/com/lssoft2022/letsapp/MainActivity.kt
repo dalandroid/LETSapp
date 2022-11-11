@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.kakao.util.maps.helper.Utility
 import com.lssoft2022.letsapp.databinding.ActivityMainBinding
 
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         // 키 해시값을 얻어오는 기능을 가진 클래스에게 디버그용 키해시값 얻어오기
         val keyHash = Utility.getKeyHash(this)
         Log.d("TAG", keyHash)
+
 
         binding.BNV.setOnItemSelectedListener { item->
             changFramgment(

@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatSpinner
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.lssoft2022.letsapp.databinding.ActivityEditBinding
 import java.lang.reflect.Field
 import java.util.*
@@ -24,9 +26,6 @@ class EditActivity : AppCompatActivity() {
 
     val binding:ActivityEditBinding by lazy { ActivityEditBinding.inflate(layoutInflater) }
 
-    lateinit var firebaseFirestore:FirebaseFirestore
-    lateinit var Ref:CollectionReference
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -37,9 +36,9 @@ class EditActivity : AppCompatActivity() {
         val category=intent.getStringExtra("category")
 
         binding.etPlace.setText("$area $place")
-        binding.tvCategory.text=category
         binding.btnCancel.setOnClickListener{finish()}
 
+        //-------------------num spinner-----------------------------//
         binding.numSpinner.adapter= ArrayAdapter.createFromResource(this,R.array.num,R.layout.spinner_selected)
             .also { adapter -> adapter.setDropDownViewResource(R.layout.spinner_dropdown)
                 binding.numSpinner.adapter=adapter}
@@ -51,6 +50,22 @@ class EditActivity : AppCompatActivity() {
         popupWindow.height = 500
 
         binding.numSpinner.dropDownVerticalOffset=100
+        //-------------------num spinner-----------------------------//
+
+        //-------------------num spinner-----------------------------//
+        binding.categorySpinner.adapter= ArrayAdapter.createFromResource(this,R.array.event,R.layout.spinner_selected)
+            .also { adapter -> adapter.setDropDownViewResource(R.layout.spinner_dropdown)
+                binding.categorySpinner.adapter=adapter}
+
+        val popup2: Field = AppCompatSpinner::class.java.getDeclaredField("mPopup")
+        popup2.isAccessible = true
+        val popupWindow2 = popup[binding.categorySpinner] as
+                androidx.appcompat.widget.ListPopupWindow
+        popupWindow2.height = 500
+
+        binding.numSpinner.dropDownVerticalOffset=100
+        //-------------------num spinner-----------------------------//
+
 
         binding.tvDate.setOnClickListener {
             val cal=Calendar.getInstance()
@@ -71,6 +86,24 @@ class EditActivity : AppCompatActivity() {
         }
         // ------------------------------------작성완료 버튼------------------------------------------------------
         binding.btnComplete.setOnClickListener {
+
+            val db_title:String=binding.etTitle.text.toString()
+            val db_place:String=binding.etPlace.text.toString()
+            val db_date:String=binding.tvDate.text.toString()
+            val db_time:String=binding.tvTime.text.toString()
+            val db_maxnum:String=binding.numSpinner.selectedItem.toString()
+            val db_category:String=binding.categorySpinner.selectedItem.toString()
+
+            val db=Firebase.firestore
+
+            val party= hashMapOf(
+                "title" to db_title,
+                "place" to db_place
+            )
+
+            db.collection("board").add(party).addOnSuccessListener {
+                Log.d("TAG", "성공")
+            }
 
             val intent:Intent=Intent(this@EditActivity,MainActivity::class.java)
             intent.putExtra("fragment","party")

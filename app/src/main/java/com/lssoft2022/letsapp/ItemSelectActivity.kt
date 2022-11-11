@@ -32,9 +32,6 @@ class ItemSelectActivity : AppCompatActivity() {
         val target=intent.getStringExtra("target")
         val category=intent.getStringExtra("category")
 
-        Toast.makeText(this@ItemSelectActivity, ""+category, Toast.LENGTH_SHORT).show()
-
-
         binding.tvTitle.text=title
         binding.tvTarget.text= "대 상 : $target"
         binding.tvTel.text= "전화번호 : $tel"
