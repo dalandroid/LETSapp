@@ -30,6 +30,9 @@ class ItemSelectActivity : AppCompatActivity() {
         val y=intent.getStringExtra("y")
         val site=intent.getStringExtra("site")
         val target=intent.getStringExtra("target")
+        val category=intent.getStringExtra("category")
+
+        Toast.makeText(this@ItemSelectActivity, ""+category, Toast.LENGTH_SHORT).show()
 
 
         binding.tvTitle.text=title
@@ -48,6 +51,7 @@ class ItemSelectActivity : AppCompatActivity() {
             intent.putExtra("area",area)
             intent.putExtra("place",place)
             intent.putExtra("title",title)
+            intent.putExtra("category",category)
             startActivity(intent)
         }
         binding.btnToSite.setOnClickListener {

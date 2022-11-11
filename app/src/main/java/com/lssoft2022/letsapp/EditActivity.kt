@@ -34,21 +34,23 @@ class EditActivity : AppCompatActivity() {
         val area =intent.getStringExtra("area")
         val place =intent.getStringExtra("place")
         val title =intent.getStringExtra("title")
+        val category=intent.getStringExtra("category")
 
         binding.etPlace.setText("$area $place")
+        binding.tvCategory.text=category
         binding.btnCancel.setOnClickListener{finish()}
 
-        binding.spinner.adapter= ArrayAdapter.createFromResource(this,R.array.num,R.layout.spinner_selected)
+        binding.numSpinner.adapter= ArrayAdapter.createFromResource(this,R.array.num,R.layout.spinner_selected)
             .also { adapter -> adapter.setDropDownViewResource(R.layout.spinner_dropdown)
-                binding.spinner.adapter=adapter}
+                binding.numSpinner.adapter=adapter}
 
         val popup: Field = AppCompatSpinner::class.java.getDeclaredField("mPopup")
         popup.isAccessible = true
-        val popupWindow = popup[binding.spinner] as
+        val popupWindow = popup[binding.numSpinner] as
                 androidx.appcompat.widget.ListPopupWindow
         popupWindow.height = 500
 
-        binding.spinner.dropDownVerticalOffset=100
+        binding.numSpinner.dropDownVerticalOffset=100
 
         binding.tvDate.setOnClickListener {
             val cal=Calendar.getInstance()

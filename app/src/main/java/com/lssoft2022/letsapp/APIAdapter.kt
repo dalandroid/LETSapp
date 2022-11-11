@@ -17,7 +17,7 @@ import com.lssoft2022.letsapp.databinding.RecyclerMainItemBinding
 import com.lssoft2022.letsapp.databinding.RecyclerPartyItemBinding
 import java.io.Serializable
 
-class APIAdapter constructor(val context: Context, var items:MutableList<ApiDto>): RecyclerView.Adapter<APIAdapter.VH>() {
+class APIAdapter constructor(val context: Context, var items:MutableList<ApiDto>, var category:String?=null): RecyclerView.Adapter<APIAdapter.VH>() {
 
     inner class VH constructor(itemView:View):RecyclerView.ViewHolder(itemView){
         val binding:RecyclerApilistItemBinding=RecyclerApilistItemBinding.bind(itemView)
@@ -48,6 +48,7 @@ class APIAdapter constructor(val context: Context, var items:MutableList<ApiDto>
             intent.putExtra("y",items[position].y.toString())
             intent.putExtra("site",items[position].site)
             intent.putExtra("target",items[position].target)
+            intent.putExtra("category",category)
             startActivity(context,intent, Bundle())
 
         }

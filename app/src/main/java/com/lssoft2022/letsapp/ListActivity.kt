@@ -51,7 +51,7 @@ class ListActivity : AppCompatActivity() {
 
         searchItem()
 
-        binding.recyclerView.adapter=APIAdapter(this,list)
+        binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category])
 
 
 
@@ -62,23 +62,27 @@ class ListActivity : AppCompatActivity() {
 
         val popup: Field = AppCompatSpinner::class.java.getDeclaredField("mPopup")
         popup.isAccessible = true
-        val popupWindow = popup[binding.spinner1] as
-                androidx.appcompat.widget.ListPopupWindow
+        val popupWindow = popup[binding.spinner1] as androidx.appcompat.widget.ListPopupWindow
         popupWindow.height = 700
 
         binding.spinner1.dropDownVerticalOffset=100
 
         binding.spinner1.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if(p2==0 && !sp2_isCheck && !sp3_isCheck){
-                    binding.recyclerView.adapter=APIAdapter(this@ListActivity,list)
+                if(p2==0){
                     sp1_isCheck=false
+                    if(sp2_isCheck || sp3_isCheck){
+                        makeFilter()
+                    }else{
+                        changelist()
+                    }
+
                 }else{
                     str1=binding.spinner1.selectedItem.toString()
                     sp1_isCheck=true
                     makeFilter()
                 }
-
+                binding.recyclerView.adapter?.notifyDataSetChanged()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -95,16 +99,26 @@ class ListActivity : AppCompatActivity() {
                 binding.spinner2.adapter=adapter}
 
 
-        val popupWindow2 = popup[binding.spinner2] as
-                androidx.appcompat.widget.ListPopupWindow
+        val popupWindow2 = popup[binding.spinner2] as androidx.appcompat.widget.ListPopupWindow
         popupWindow2.height = 700
 
         binding.spinner2.dropDownVerticalOffset=100
 
         binding.spinner2.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                when(p2){
+                if(p2==0){
+                    sp2_isCheck=false
+                    if(sp1_isCheck || sp3_isCheck){
+                        makeFilter()
+                    }else {
+                        changelist()
+                    }
+                }else{
+                    str2=binding.spinner2.selectedItem.toString()
+                    sp2_isCheck=true
+                    makeFilter()
                 }
+                binding.recyclerView.adapter?.notifyDataSetChanged()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -120,16 +134,26 @@ class ListActivity : AppCompatActivity() {
                 binding.spinner3.adapter=adapter}
 
 
-        val popupWindow3 = popup[binding.spinner3] as
-                androidx.appcompat.widget.ListPopupWindow
+        val popupWindow3 = popup[binding.spinner3] as androidx.appcompat.widget.ListPopupWindow
         popupWindow3.height = 700
 
         binding.spinner3.dropDownVerticalOffset=100
 
         binding.spinner3.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                when(p2){
+                if(p2==0){
+                    sp3_isCheck=false
+                    if(sp1_isCheck || sp2_isCheck){
+                        makeFilter()
+                    }else {
+                        changelist()
+                    }
+                }else{
+                    str3=binding.spinner3.selectedItem.toString()
+                    sp3_isCheck=true
+                    makeFilter()
                 }
+                binding.recyclerView.adapter?.notifyDataSetChanged()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -162,7 +186,8 @@ class ListActivity : AppCompatActivity() {
                     val apiResponse=response.body()
 
                     apiResponse?.apiResult?.ApiList?.let {
-                        binding.recyclerView.adapter=APIAdapter(this@ListActivity,it)
+                        list= apiResponse?.apiResult?.ApiList!!
+                        binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category])
                     }
 
                 }else{
@@ -187,9 +212,70 @@ class ListActivity : AppCompatActivity() {
     }
 
     private fun makeFilter(){
+        filter_items.clear()
+        // -- sp1 만 선택-- //
         if(sp1_isCheck && !sp2_isCheck && !sp3_isCheck){
+            for(i in 0 until list.size){
+                if(list[i].area.equals(str1)){
+                    filter_items.add(ApiDto(list[i].imgurl,list[i].title,list[i].target,list[i].area,list[i].place,list[i].v_min,list[i].v_max,list[i].pay,
+                        list[i].state,list[i].x, list[i].y, list[i].site, list[i].tel))}}}
+        // -- sp1 만 선택-- //
 
-        }
+        // -- sp2 만 선택-- //
+        if(!sp1_isCheck && sp2_isCheck && !sp3_isCheck){
+            for(i in 0 until list.size){
+                if(list[i].state.equals(str2)){
+                    filter_items.add(ApiDto(list[i].imgurl,list[i].title,list[i].target,list[i].area,list[i].place,list[i].v_min,list[i].v_max,list[i].pay,
+                        list[i].state,list[i].x, list[i].y, list[i].site, list[i].tel))}}}
+        // -- sp2 만 선택-- //
+
+        // -- sp3 만 선택-- //
+        if(!sp1_isCheck && !sp2_isCheck && sp3_isCheck){
+            for(i in 0 until list.size){
+                if(list[i].pay.equals(str3)){
+                    filter_items.add(ApiDto(list[i].imgurl,list[i].title,list[i].target,list[i].area,list[i].place,list[i].v_min,list[i].v_max,list[i].pay,
+                        list[i].state,list[i].x, list[i].y, list[i].site, list[i].tel))}}}
+        // -- sp3 만 선택-- //
+
+        // -- sp1, sp2 만 선택-- //
+        if(sp1_isCheck && sp2_isCheck && !sp3_isCheck){
+            for(i in 0 until list.size){
+                if(list[i].state.equals(str2) && list[i].area.equals(str1)){
+                    filter_items.add(ApiDto(list[i].imgurl,list[i].title,list[i].target,list[i].area,list[i].place,list[i].v_min,list[i].v_max,list[i].pay,
+                        list[i].state,list[i].x, list[i].y, list[i].site, list[i].tel))}}}
+        // -- sp1, sp2 만 선택-- //
+
+        // -- sp1, sp3 만 선택-- //
+        if(sp1_isCheck && !sp2_isCheck && sp3_isCheck){
+            for(i in 0 until list.size){
+                if(list[i].area.equals(str1) && list[i].pay.equals(str3)){
+                    filter_items.add(ApiDto(list[i].imgurl,list[i].title,list[i].target,list[i].area,list[i].place,list[i].v_min,list[i].v_max,list[i].pay,
+                        list[i].state,list[i].x, list[i].y, list[i].site, list[i].tel))}}}
+        // -- sp1, sp3 만 선택-- //
+
+        // -- sp2, sp3 만 선택-- //
+        if(!sp1_isCheck && sp2_isCheck && sp3_isCheck){
+            for(i in 0 until list.size){
+                if(list[i].state.equals(str2) && list[i].pay.equals(str3)){
+                    filter_items.add(ApiDto(list[i].imgurl,list[i].title,list[i].target,list[i].area,list[i].place,list[i].v_min,list[i].v_max,list[i].pay,
+                        list[i].state,list[i].x, list[i].y, list[i].site, list[i].tel))}}}
+        // -- sp2, sp3 만 선택-- //
+
+        // -- sp1, sp2, sp3 만 선택-- //
+        if(sp1_isCheck && sp2_isCheck && sp3_isCheck){
+            for(i in 0 until list.size){
+                if(list[i].area.equals(str1) && list[i].state.equals(str2) && list[i].pay.equals(str3)){
+                    filter_items.add(ApiDto(list[i].imgurl,list[i].title,list[i].target,list[i].area,list[i].place,list[i].v_min,list[i].v_max,list[i].pay,
+                        list[i].state,list[i].x, list[i].y, list[i].site, list[i].tel))}}}
+        // -- sp1, sp2, sp3 만 선택-- //
+
+        binding.recyclerView.adapter=APIAdapter(this@ListActivity,filter_items,categoryTitle[category])
     }
 
+    private fun changelist(){
+        if(!sp1_isCheck && !sp2_isCheck && !sp3_isCheck){
+            binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category])
+    }
+
+    }
 }

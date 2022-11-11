@@ -25,7 +25,8 @@ class PartyAdapter constructor(val context: Context, var items:MutableList<ItemP
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.binding.title.text=items[position].title
         holder.binding.loca.text="장 소 : "+items[position].loca
-        holder.binding.date.text="시 간 : "+items[position].date
+        holder.binding.date.text="날 짜 : "+items[position].date
+        holder.binding.time.text="시 간 : "+items[position].time
         holder.binding.name.text="파티장 : Lv"+items[position].level+" "+items[position].name
         holder.binding.btn.text=items[position].count.toString()+"/"+items[position].maxnum.toString()
 

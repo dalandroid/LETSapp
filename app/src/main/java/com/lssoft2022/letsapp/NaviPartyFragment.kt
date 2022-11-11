@@ -120,10 +120,10 @@ class NaviPartyFragment : Fragment() {
         items.clear()
         recyclerView.adapter?.notifyDataSetChanged()
 
-        items.add(ItemParty("5:5 농구","성동구 농구장","2022년 11월 18일","sam",3,10,6))
-        items.add(ItemParty("3:3 농구","응봉동 농구장","2022년 11월 18일","sam",1,6,6))
-        items.add(ItemParty("5:5 풋살","중구 농구장","2022년 11월 18일","sam",10,10,3))
-        items.add(ItemParty("1:1 배드민턴 치실분","성수동 배드민턴장","2022년 11월 18일","sam",5,2,1))
+        items.add(ItemParty("5:5 농구","성동구 농구장","2022년 11월 18일","15시 00분","sam",3,10,6))
+        items.add(ItemParty("3:3 농구","응봉동 농구장","2022년 11월 18일","11시 30분","sam",1,6,6))
+        items.add(ItemParty("5:5 풋살","중구 농구장","2022년 11월 18일","10시 00분","sam",10,10,3))
+        items.add(ItemParty("1:1 배드민턴 치실분","성수동 배드민턴장","2022년 11월 18일","18시 30분","sam",5,2,1))
 
         recyclerView.adapter?.notifyDataSetChanged()
     }
