@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EasyLoginActivity">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:src="@drawable/blank"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="#36EAEAEA"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/ghanachocolate"
+        android:letterSpacing="0.2"
+        android:textSize="50dp"/>
+
+    <TextView
+        android:id="@+id/tv_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/ghanachocolate"
+        android:text="User ID"
+        android:textColor="#009688"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/et_id"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_id"
+        android:layout_centerHorizontal="true"
+        android:inputType="textEmailAddress"
+        android:hint="e-mail"
+        android:padding="12dp" />
+
+    <TextView
+        android:id="@+id/tv_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:layout_below="@+id/et_id"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="35dp"
+        android:textColor="#009688"
+        android:textSize="16sp"
+        android:fontFamily="@font/ghanachocolate"/>
+
+    <EditText
+        android:id="@+id/et_pw"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_pw"
+        android:layout_centerHorizontal="true"
+        android:hint="password"
+        android:padding="12dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/et_pw"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:background="#A8D8A0"
+        android:fontFamily="@font/ghanachocolate"
+        android:inputType="text"
+        android:letterSpacing="0.2"
+        android:text="LOGIN" />
+
+    <TextView
+        android:id="@+id/login_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="아직 계정이 없으신가요?"
+        android:layout_alignLeft="@+id/btn_login"
+        android:layout_below="@+id/btn_login"
+        android:textColor="@color/black"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="5dp"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_login"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="6dp"
+        android:layout_toRightOf="@+id/login_tv"
+        android:fontFamily="@font/ghanachocolate"
+        android:text="가입하기"
+        android:textColor="@color/blue" />
+
+
+
+
+
+</RelativeLayout>

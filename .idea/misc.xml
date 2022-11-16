@@ -6,6 +6,7 @@
         <entry key="..\:/Android/LETSapp/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1955" />
         <entry key="..\:/Android/LETSapp/app/src/main/res/drawable/ic_baseline_group_24.xml" value="0.1955" />
         <entry key="..\:/Android/LETSapp/app/src/main/res/drawable/round_spinner.xml" value="0.1955" />
+        <entry key="..\:/Android/LETSapp/app/src/main/res/layout/activity_easy_login.xml" value="0.31666666666666665" />
         <entry key="..\:/Android/LETSapp/app/src/main/res/layout/activity_edit.xml" value="0.31666666666666665" />
         <entry key="..\:/Android/LETSapp/app/src/main/res/layout/activity_intro.xml" value="0.31244444444444447" />
         <entry key="..\:/Android/LETSapp/app/src/main/res/layout/activity_item_select.xml" value="0.31666666666666665" />
@@ -13,6 +14,7 @@
         <entry key="..\:/Android/LETSapp/app/src/main/res/layout/activity_login.xml" value="0.31666666666666665" />
         <entry key="..\:/Android/LETSapp/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Android/LETSapp/app/src/main/res/layout/activity_profile.xml" value="0.31666666666666665" />
+        <entry key="..\:/Android/LETSapp/app/src/main/res/layout/activity_register.xml" value="0.30405405405405406" />
         <entry key="..\:/Android/LETSapp/app/src/main/res/layout/fragment_navi_favor.xml" value="0.31666666666666665" />
         <entry key="..\:/Android/LETSapp/app/src/main/res/layout/fragment_navi_list.xml" value="0.25" />
         <entry key="..\:/Android/LETSapp/app/src/main/res/layout/fragment_navi_map.xml" value="0.31666666666666665" />

@@ -1,16 +1,19 @@
 package com.lssoft2022.letsapp
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Switch
+import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 
 class NaviListFragment : Fragment() {
 
@@ -25,6 +28,33 @@ class NaviListFragment : Fragment() {
         val gridLayoutManager: GridLayoutManager = GridLayoutManager(requireContext(),3,GridLayoutManager.VERTICAL,false)
         val linearLayoutManager:LinearLayoutManager= LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         val switch:SwitchCompat=rootView.findViewById(R.id.swit)
+
+        val tvLevel:TextView=rootView.findViewById(R.id.tv_level)
+        val tvNickname:TextView=rootView.findViewById(R.id.tv_nickname)
+
+        //fire DB
+        val firebaseFirestore = FirebaseFirestore.getInstance()
+        val userRef = firebaseFirestore.collection("User")
+        //fire DB
+
+        //shared DB
+        val sharedPreferences = requireActivity().applicationContext.getSharedPreferences("account", Context.MODE_PRIVATE)
+
+        val email:String?=sharedPreferences.getString("email",null)
+        //Shared DB
+
+        userRef.document(email!!).get().addOnSuccessListener { snapshot ->
+            if(snapshot.exists()){
+                val nickname:String=snapshot.getString("nickname").toString()
+                val level:String=snapshot.getString("level").toString()
+
+                tvLevel.text="Level "+level
+                tvNickname.text=nickname
+            }else{
+                tvLevel.text="Level 0"
+                tvNickname.text="닉네임을 설정해주세요"
+            }
+        }
 
 
         recyclerView=rootView.findViewById(R.id.recycler_view)as RecyclerView

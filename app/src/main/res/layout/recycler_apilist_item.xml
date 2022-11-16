@@ -63,10 +63,10 @@
             android:id="@+id/api_favor"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_favor_false"
             android:layout_alignBottom="@+id/api_state"
+            android:layout_marginRight="4dp"
             android:layout_toLeftOf="@+id/api_count"
-            android:layout_marginRight="4dp"/>
+            android:src="@drawable/ic_favor_false" />
 
         <TextView
             android:id="@+id/api_count"

@@ -15,7 +15,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        btn1.setOnClickListener { clickButton() }
+        btn1.setOnClickListener { clickEasyLogin() }
         btn2.setOnClickListener { clickButton() }
         btn3.setOnClickListener { clickButton() }
 
@@ -26,5 +26,10 @@ class LoginActivity : AppCompatActivity() {
         val intent:Intent=Intent(this@LoginActivity,MainActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun clickEasyLogin(){
+        val intent:Intent=Intent(this@LoginActivity,EasyLoginActivity::class.java)
+        startActivity(intent)
     }
 }

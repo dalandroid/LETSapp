@@ -66,25 +66,25 @@
                 android:id="@+id/tool_tv_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tool_civ"
-                android:text="Level 1"
                 android:layout_centerVertical="true"
-                android:textColor="#FFC107"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/tool_civ"
                 android:fontFamily="@font/kmi_bold"
-                android:textSize="16sp"
-                android:layout_marginLeft="8dp"/>
+                android:text="Level 1"
+                android:textColor="#FFC107"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tool_tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tool_tv_level"
-                android:text="이상훈 님"
                 android:layout_centerVertical="true"
-                android:textSize="16sp"
-                android:textColor="@color/black"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/tool_tv_level"
                 android:fontFamily="@font/kmi_bold"
-                android:layout_marginLeft="8dp"/>
+                android:text="이상훈 님"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/tool_toprofile"
@@ -164,6 +164,43 @@
 
                 <ImageView
                     android:id="@+id/tool_tosetting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:layout_marginRight="20dp"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_gravity="center_horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/kmi_bold"
+                    android:letterSpacing="0.15"
+                    android:text="로그아웃"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/tool_tologout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

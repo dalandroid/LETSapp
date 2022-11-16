@@ -3,18 +3,11 @@ package com.lssoft2022.letsapp
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatSpinner
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.lssoft2022.letsapp.databinding.ActivityEditBinding
 import java.lang.reflect.Field
 import java.util.*
@@ -23,6 +16,9 @@ class EditActivity : AppCompatActivity() {
 
     var dateString=""
     var timeString=""
+
+    lateinit var nickname:String
+    lateinit var level:String
 
     val binding:ActivityEditBinding by lazy { ActivityEditBinding.inflate(layoutInflater) }
 
@@ -34,6 +30,29 @@ class EditActivity : AppCompatActivity() {
         val place =intent.getStringExtra("place")
         val title =intent.getStringExtra("title")
         val category=intent.getStringExtra("category")
+
+
+        // fire board DB
+        val firebaseFirestore = FirebaseFirestore.getInstance()
+        val boardRef = firebaseFirestore.collection("board")
+        // fire board DB
+
+        // fire user DB
+        val userRef =firebaseFirestore.collection("User")
+
+        // fire user DB
+
+        // shared DB
+        val sharedPreferences=getSharedPreferences("account", MODE_PRIVATE)
+        val email:String=sharedPreferences.getString("email",null).toString()
+        // shared DB
+
+        userRef.document(email).get().addOnSuccessListener { snapshot ->
+            if(snapshot.exists()){
+                nickname=snapshot.getString("nickname").toString()
+                level=snapshot.getString("level").toString()
+            }
+        }
 
         binding.etPlace.setText("$area $place")
         binding.btnCancel.setOnClickListener{finish()}
@@ -94,16 +113,14 @@ class EditActivity : AppCompatActivity() {
             val db_maxnum:String=binding.numSpinner.selectedItem.toString()
             val db_category:String=binding.categorySpinner.selectedItem.toString()
 
-            val db=Firebase.firestore
+            val level_int:Int=level.toInt()+1
+            level=level_int.toString()
+            userRef.document(email).update("level",level)
 
-            val party= hashMapOf(
-                "title" to db_title,
-                "place" to db_place
-            )
+            var item:DBitem= DBitem( db_title,db_place,db_date,db_time,db_maxnum,db_category,area!!,level,nickname,email)
 
-            db.collection("board").add(party).addOnSuccessListener {
-                Log.d("TAG", "성공")
-            }
+            boardRef.document("party_"+System.currentTimeMillis()).set(item)
+
 
             val intent:Intent=Intent(this@EditActivity,MainActivity::class.java)
             intent.putExtra("fragment","party")

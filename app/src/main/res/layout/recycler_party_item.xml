@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="340dp"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="4dp"
     android:elevation="10dp"
@@ -28,12 +28,12 @@
             android:id="@+id/loca"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="장 소 : 성동구 농구장"
             android:layout_below="@+id/title"
             android:layout_marginTop="8dp"
-            android:textColor="#777777"
             android:fontFamily="@font/dalseo"
-            android:letterSpacing="0.08"/>
+            android:letterSpacing="0.08"
+            android:text="장 소 : 성동구 농구장"
+            android:textColor="#777777" />
 
         <TextView
             android:id="@+id/date"
@@ -61,12 +61,13 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="파티장 : Lv3 홍길동"
+            android:layout_below="@+id/time"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/dalseo"
-            android:textColor="#3F51B5"
             android:maxWidth="150dp"
-            android:layout_marginBottom="8dp"/>
+            android:text="파티장 : Lv3 홍길동"
+            android:textColor="#3F51B5" />
 
         <Button
             android:id="@+id/btn"
@@ -77,14 +78,17 @@
             android:backgroundTint="#003EFB"
             android:enabled="true"
             android:text="1/10" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="참가"
             android:layout_above="@+id/btn"
             android:layout_alignLeft="@+id/btn"
             android:layout_marginLeft="30dp"
-            android:textSize="12sp"/>
+            android:layout_marginBottom="1dp"
+            android:text="참가"
+            android:textSize="12sp" />
+
 
 
 

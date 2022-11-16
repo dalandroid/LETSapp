@@ -2,6 +2,7 @@ package com.lssoft2022.letsapp
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,12 +13,16 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.lssoft2022.letsapp.databinding.RecyclerApilistItemBinding
 import com.lssoft2022.letsapp.databinding.RecyclerMainItemBinding
 import com.lssoft2022.letsapp.databinding.RecyclerPartyItemBinding
 import java.io.Serializable
+import java.util.ArrayList
 
-class APIAdapter constructor(val context: Context, var items:MutableList<ApiDto>, var category:String?=null): RecyclerView.Adapter<APIAdapter.VH>() {
+class APIAdapter(val context: Context, var items: MutableList<ApiDto>, var category:String?=null): RecyclerView.Adapter<APIAdapter.VH>() {
 
     inner class VH constructor(itemView:View):RecyclerView.ViewHolder(itemView){
         val binding:RecyclerApilistItemBinding=RecyclerApilistItemBinding.bind(itemView)
@@ -34,6 +39,13 @@ class APIAdapter constructor(val context: Context, var items:MutableList<ApiDto>
         holder.binding.apiLoca.text=items[position].area
         holder.binding.apiState.text=items[position].state
         Glide.with(context).load(items[position].imgurl).error(R.drawable.blank).into(holder.binding.apiIv)
+
+//        holder.binding.apiFavor.setOnClickListener {
+//            val firebaseFirestore = FirebaseFirestore.getInstance()
+//            val db= Firebase.firestore
+//            //채팅방 이름으로 컬렉션만들고 이를 참조
+//            val favorRef = firebaseFirestore.collection("favor")
+//        }
 
         holder.binding.root.setOnClickListener{
             val intent:Intent = Intent(context, ItemSelectActivity::class.java)

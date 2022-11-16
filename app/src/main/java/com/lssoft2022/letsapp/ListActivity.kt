@@ -3,14 +3,11 @@ package com.lssoft2022.letsapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatSpinner
-import androidx.recyclerview.widget.RecyclerView
 import com.lssoft2022.letsapp.databinding.ActivityListBinding
 import retrofit2.Call
 import retrofit2.Callback

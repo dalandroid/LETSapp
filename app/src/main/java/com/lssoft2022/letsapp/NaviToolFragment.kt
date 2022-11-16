@@ -1,12 +1,17 @@
 package com.lssoft2022.letsapp
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.firebase.firestore.FirebaseFirestore
 import com.lssoft2022.letsapp.databinding.FragmentNaviToolBinding
 
 class NaviToolFragment : Fragment() {
@@ -18,10 +23,38 @@ class NaviToolFragment : Fragment() {
         val ivToProfile:ImageView=rootView.findViewById(R.id.tool_toprofile)
         val ivToNotice:ImageView=rootView.findViewById(R.id.tool_tonotice)
         val ivToSetting:ImageView=rootView.findViewById(R.id.tool_tosetting)
+        val ivTologout:ImageView=rootView.findViewById(R.id.tool_tologout)
+
+        val tvLevel:TextView=rootView.findViewById(R.id.tool_tv_level)
+        val tvNickname:TextView=rootView.findViewById(R.id.tool_tv_name)
+
+        val sharedPreferences = requireActivity().applicationContext.getSharedPreferences("account", Context.MODE_PRIVATE)
+        var editor: SharedPreferences.Editor=sharedPreferences.edit()
+
+        val email:String=sharedPreferences.getString("email",null).toString()
+
+        val firestore=FirebaseFirestore.getInstance()
+        val userRef=firestore.collection("User")
+
+        userRef.document(email).get().addOnSuccessListener { snapshot->
+            if(snapshot.exists()){
+                tvLevel.text="Level "+snapshot.getString("level").toString()
+                tvNickname.text=snapshot.getString("nickname").toString()
+            }
+        }
 
         ivToProfile.setOnClickListener { startActivity(Intent(requireContext(),ProfileActivity::class.java)) }
         // 액티비티 바꾸기
         ivToNotice.setOnClickListener { startActivity(Intent(requireContext(),ProfileActivity::class.java)) }
+
+        ivTologout.setOnClickListener {
+            val intent:Intent=Intent(requireContext(),LoginActivity::class.java)
+            editor.putBoolean("islogin",false)
+            editor.putString("email",null)
+            editor.putString("nickname",null)
+            editor.commit()
+            startActivity(intent)
+        }
 
         return rootView
     }
