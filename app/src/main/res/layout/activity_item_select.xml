@@ -8,6 +8,7 @@
     android:background="@color/brand">
 
     <ImageView
+        android:id="@+id/iv_imgurl"
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:src="@drawable/bg_one01"
@@ -29,12 +30,13 @@
             android:src="@drawable/ic_baseline_arrow_back_ios_24_black" />
 
         <ImageView
+            android:id="@+id/iv_favor"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_favor_false"
             android:layout_alignBottom="@+id/tv_favor"
+            android:layout_marginRight="6dp"
             android:layout_toLeftOf="@+id/tv_favor"
-            android:layout_marginRight="6dp"/>
+            android:src="@drawable/ic_favor_false" />
 
         <TextView
             android:id="@+id/tv_favor"

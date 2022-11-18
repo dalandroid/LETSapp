@@ -116,10 +116,11 @@ class EditActivity : AppCompatActivity() {
             val level_int:Int=level.toInt()+1
             level=level_int.toString()
             userRef.document(email).update("level",level)
+            val boardTitle="party_"+System.currentTimeMillis()
 
-            var item:DBitem= DBitem( db_title,db_place,db_date,db_time,db_maxnum,db_category,area!!,level,nickname,email)
+            var item:DBitem= DBitem( db_title,db_place,db_date,db_time,db_maxnum,db_category,area!!,level,nickname,email,boardTitle)
 
-            boardRef.document("party_"+System.currentTimeMillis()).set(item)
+            boardRef.document(boardTitle).set(item)
 
 
             val intent:Intent=Intent(this@EditActivity,MainActivity::class.java)

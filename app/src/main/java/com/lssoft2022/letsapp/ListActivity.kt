@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatSpinner
+import com.google.firebase.firestore.FirebaseFirestore
 import com.lssoft2022.letsapp.databinding.ActivityListBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,6 +32,8 @@ class ListActivity : AppCompatActivity() {
     var sp2_isCheck:Boolean=false
     var sp3_isCheck:Boolean=false
 
+    lateinit var nickname:String
+
     lateinit var str1:String
     lateinit var str2:String
     lateinit var str3:String
@@ -46,9 +49,15 @@ class ListActivity : AppCompatActivity() {
 
         binding.tvToolbar.text=categoryTitle[category]
 
+        val sharedPreferences=getSharedPreferences("account", MODE_PRIVATE)
+        nickname =sharedPreferences.getString("nickname",null)!!
+
+        val firebaseFirestore=FirebaseFirestore.getInstance()
+        val favorRef=firebaseFirestore.collection("favor")
+
         searchItem()
 
-        binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category])
+        binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category],nickname)
 
 
 
@@ -184,14 +193,12 @@ class ListActivity : AppCompatActivity() {
 
                     apiResponse?.apiResult?.ApiList?.let {
                         list= apiResponse?.apiResult?.ApiList!!
-                        binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category])
+                        binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category],nickname)
                     }
 
                 }else{
                     Toast.makeText(this@ListActivity, "에러", Toast.LENGTH_SHORT).show()
                 }
-
-
 
             }
 
@@ -266,12 +273,12 @@ class ListActivity : AppCompatActivity() {
                         list[i].state,list[i].x, list[i].y, list[i].site, list[i].tel))}}}
         // -- sp1, sp2, sp3 만 선택-- //
 
-        binding.recyclerView.adapter=APIAdapter(this@ListActivity,filter_items,categoryTitle[category])
+        binding.recyclerView.adapter=APIAdapter(this@ListActivity,filter_items,categoryTitle[category],nickname)
     }
 
     private fun changelist(){
         if(!sp1_isCheck && !sp2_isCheck && !sp3_isCheck){
-            binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category])
+            binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category],nickname)
     }
 
     }

@@ -3,6 +3,7 @@ package com.lssoft2022.letsapp
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,10 @@ import android.widget.*
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide.init
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.ktx.toObject
 import java.lang.reflect.Field
 import java.util.*
 
@@ -32,6 +35,7 @@ class NaviPartyFragment : Fragment() {
     lateinit var str2: String
 
     lateinit var shared_email:String
+    lateinit var shared_nickname:String
 
     val items: ArrayList<ItemParty> = ArrayList()
     val filter_items: ArrayList<ItemParty> = ArrayList()
@@ -49,44 +53,72 @@ class NaviPartyFragment : Fragment() {
 
         val sharedPreferences = requireActivity().applicationContext.getSharedPreferences("account", Context.MODE_PRIVATE)
         shared_email=sharedPreferences.getString("email",null).toString()
+        shared_nickname=sharedPreferences.getString("nickname",null).toString()
 
         recyclerView = rootView.findViewById<RecyclerView>(R.id.recycler_view)
-        recyclerView.adapter = PartyAdapter(requireContext(), items,shared_email)
+        recyclerView.adapter = PartyAdapter(requireContext(), items,shared_email, shared_nickname)
 
         val boardRef = firebaseFirestore.collection("board")
 
-        boardRef.addSnapshotListener(EventListener<QuerySnapshot?> { value, error ->
+        boardRef.get().addOnSuccessListener { result ->
+            for(document in result){
+                val title: String = document.get("title").toString()
+                val place: String = document.get("place").toString()
+                val date: String = document.get("date").toString()
+                val time: String = document.get("time").toString()
+                val category: String = document.get("category").toString()
+                val area: String = document.get("area").toString()
 
-            val documentChangeList = value!!.documentChanges
-            for (documentChange in documentChangeList) {
-
-                val snapshot: DocumentSnapshot = documentChange.document
-
-                val dataSet = snapshot.data
-                val title: String = dataSet?.get("title").toString()
-                val place: String = dataSet?.get("place").toString()
-                val date: String = dataSet?.get("date").toString()
-                val time: String = dataSet?.get("time").toString()
-                val category: String = dataSet?.get("category").toString()
-                val area: String = dataSet?.get("area").toString()
-
-                val num: String = dataSet?.get("num").toString()
+                val num: String = document.get("num").toString()
                 val num_int: Int = num.substring(0, num.length - 1).toInt()
 
-                val nickname:String= dataSet?.get("nickname").toString()
-                val level:String= dataSet?.get("level").toString()
+                val nickname:String= document.get("nickname").toString()
+                val level:String= document.get("level").toString()
                 val level_int: Int= level.toInt()
-                val email:String=dataSet?.get("email").toString()
+                val email:String=document.get("email").toString()
+                val boardTitle:String=document.get("boardTitle").toString()
+                var count:Int=document.get("count").toString().toInt()
 
-
-
-                items.add(ItemParty(title, place, date, time, nickname, level_int, num_int, 1, category, area, email))
+                items.add(ItemParty(title, place, date, time, nickname, level_int, num_int, count, category, area, email,boardTitle))
 
                 recyclerView.adapter?.notifyItemInserted(items.size - 1)
-
-
             }
-        })
+        }
+
+//        boardRef.addSnapshotListener(EventListener<QuerySnapshot?> { value, error ->
+//
+//            val documentChangeList = value!!.documentChanges
+//            for (documentChange in documentChangeList) {
+//
+//                val snapshot: DocumentSnapshot = documentChange.document
+//
+//                val dataSet = snapshot.data
+//                val title: String = dataSet?.get("title").toString()
+//                val place: String = dataSet?.get("place").toString()
+//                val date: String = dataSet?.get("date").toString()
+//                val time: String = dataSet?.get("time").toString()
+//                val category: String = dataSet?.get("category").toString()
+//                val area: String = dataSet?.get("area").toString()
+//
+//                val num: String = dataSet?.get("num").toString()
+//                val num_int: Int = num.substring(0, num.length - 1).toInt()
+//
+//                val nickname:String= dataSet?.get("nickname").toString()
+//                val level:String= dataSet?.get("level").toString()
+//                val level_int: Int= level.toInt()
+//                val email:String=dataSet?.get("email").toString()
+//                val boardTitle:String=dataSet?.get("boardTitle").toString()
+//                var count:Int=dataSet?.get("count").toString().toInt()
+//
+//
+//
+//                items.add(ItemParty(title, place, date, time, nickname, level_int, num_int, count, category, area, email,boardTitle))
+//
+//                recyclerView.adapter?.notifyItemInserted(items.size - 1)
+//
+//
+//            }
+//        })
 
         // -----------------------------------spinner 1-----------------------------------------
         spinner1 = rootView.findViewById(R.id.spinner_1)
@@ -208,7 +240,7 @@ class NaviPartyFragment : Fragment() {
         if (sp1_isCheck && !sp2_isCheck) {
             for (i in 0 until items.size) {
                 if (items[i].category.equals(str1)) {
-                    filter_items.add(ItemParty(items[i].title,items[i].loca,items[i].date,items[i].time,items[i].name,items[i].level,items[i].maxnum,1,items[i].category,items[i].area, items[i].email))
+                    filter_items.add(ItemParty(items[i].title,items[i].place,items[i].date,items[i].time,items[i].nickname,items[i].level,items[i].num,1,items[i].category,items[i].area, items[i].email, items[i].boardTitle))
                 }
 
             }
@@ -219,7 +251,7 @@ class NaviPartyFragment : Fragment() {
         if (!sp1_isCheck && sp2_isCheck) {
             for (i in 0 until items.size) {
                 if (items[i].area.equals(str2)) {
-                    filter_items.add(ItemParty(items[i].title,items[i].loca,items[i].date,items[i].time,items[i].name,items[i].level,items[i].maxnum,1,items[i].category,items[i].area,items[i].email))
+                    filter_items.add(ItemParty(items[i].title,items[i].place,items[i].date,items[i].time,items[i].nickname,items[i].level,items[i].num,1,items[i].category,items[i].area,items[i].email, items[i].boardTitle))
                 }
 
             }
@@ -230,17 +262,17 @@ class NaviPartyFragment : Fragment() {
         if(sp1_isCheck && sp2_isCheck ){
             for(i in 0 until items.size){
                 if (items[i].category.equals(str1) && items[i].area.equals(str2)) {
-                    filter_items.add(ItemParty(items[i].title,items[i].loca,items[i].date,items[i].time,items[i].name,items[i].level,items[i].maxnum,1,items[i].category,items[i].area,items[i].email))
+                    filter_items.add(ItemParty(items[i].title,items[i].place,items[i].date,items[i].time,items[i].nickname,items[i].level,items[i].num,1,items[i].category,items[i].area,items[i].email, items[i].boardTitle))
                 }
             }}
 
-        recyclerView.adapter=PartyAdapter(requireContext(),filter_items, shared_email)
+        recyclerView.adapter=PartyAdapter(requireContext(),filter_items, shared_email,shared_nickname)
     }
 
 
     private fun changelist() {
         if (!sp1_isCheck && !sp2_isCheck) {
-            recyclerView.adapter = PartyAdapter(requireContext(), items,shared_email)
+            recyclerView.adapter = PartyAdapter(requireContext(), items,shared_email,shared_nickname)
         }
 
 
