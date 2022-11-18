@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.lssoft2022.letsapp.databinding.ActivityProfileBinding
 
@@ -29,6 +30,7 @@ class ProfileActivity : AppCompatActivity() {
             if(snapshot.exists()){
                 binding.profileEtName.setText(snapshot.getString("nickname").toString())
                 binding.profileTvEmail.text=email
+                Glide.with(this@ProfileActivity).load(sharedPreferences.getString("imgurl",R.drawable.profile.toString())).error(R.drawable.profile).into(binding.profileCiv)
                 db_password=snapshot.getString("password").toString()
             }
         }

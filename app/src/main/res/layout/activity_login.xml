@@ -29,7 +29,7 @@
     <Button
         android:id="@+id/btn1"
         android:layout_width="230dp"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
@@ -38,13 +38,14 @@
         android:text="간편 로그인"
         android:textColor="@color/black" />
 
-    <Button
+    <ImageView
         android:id="@+id/btn2"
         android:layout_width="230dp"
         android:layout_height="50dp"
         android:layout_below="@+id/btn1"
+        android:layout_centerHorizontal="true"
         android:backgroundTint="@color/teal_700"
-        android:layout_centerHorizontal="true"/>
+        android:src="@drawable/kakao_login_medium_wide" />
 
     <Button
         android:id="@+id/btn3"

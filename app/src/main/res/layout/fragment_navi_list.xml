@@ -19,8 +19,8 @@
                 android:id="@+id/civ"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
-                android:src="@drawable/profile"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:src="@drawable/profile" />
 
             <TextView
                 android:id="@+id/tv_level"

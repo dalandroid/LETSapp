@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
@@ -13,7 +14,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
+import de.hdodenhof.circleimageview.CircleImageView
 
 class NaviListFragment : Fragment() {
 
@@ -31,6 +34,7 @@ class NaviListFragment : Fragment() {
 
         val tvLevel:TextView=rootView.findViewById(R.id.tv_level)
         val tvNickname:TextView=rootView.findViewById(R.id.tv_nickname)
+        val civ:CircleImageView=rootView.findViewById(R.id.civ)
 
         //fire DB
         val firebaseFirestore = FirebaseFirestore.getInstance()
@@ -50,6 +54,7 @@ class NaviListFragment : Fragment() {
 
                 tvLevel.text="Level "+level
                 tvNickname.text=nickname
+                Glide.with(requireActivity()).load(sharedPreferences.getString("imgurl",null)).error(R.drawable.profile).into(civ)
             }else{
                 tvLevel.text="Level 0"
                 tvNickname.text="닉네임을 설정해주세요"
