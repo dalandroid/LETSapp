@@ -16,6 +16,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import kotlinx.coroutines.*
 
 class NaviFavorFragment : Fragment() {
 
@@ -68,6 +69,7 @@ class NaviFavorFragment : Fragment() {
 
                         apiResponse?.apiResult?.ApiList?.let {
                             items= apiResponse?.apiResult?.ApiList!!
+                            filteredItems= filteredItems.plus(items) as MutableList<ApiDto>
                         }
                     }else{
                         Toast.makeText(requireContext(), "에러", Toast.LENGTH_SHORT).show()
@@ -79,21 +81,7 @@ class NaviFavorFragment : Fragment() {
                 }
 
             })
-            // 파싱 끝
-            // 필터링한 배열 아답터에 추가해주기
-            for(i in 0 until items.size){
-                favorRef.document(items[i].title.toString().replace("/",".")).get().addOnSuccessListener { snapshot->
-                    if(snapshot.exists()){
-                        if(!snapshot.getString(nickname).isNullOrEmpty()){
-                            filteredItems.add(ApiDto(items[i].imgurl,items[i].title,items[i].target,items[i].area,items[i].place,items[i].v_min,items[i].v_max
-                                ,items[i].pay,items[i].state,items[i].x,items[i].y,items[i].site,items[i].tel))
-                        }
-                    }
-                    recyclerView.adapter=APIAdapter(requireContext(),filteredItems,categoryTitle[category] ,sharedNickname = nickname)
-                }
-            }
 
-            // 필터링한 배열 아답터에 추가해주기
         }
 
         }

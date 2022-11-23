@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +37,7 @@ class NaviListFragment : Fragment() {
         val tvLevel:TextView=rootView.findViewById(R.id.tv_level)
         val tvNickname:TextView=rootView.findViewById(R.id.tv_nickname)
         val civ:CircleImageView=rootView.findViewById(R.id.civ)
+        //val civ2:CircleImageView=rootView.findViewById(R.id.test_civ)
 
         //fire DB
         val firebaseFirestore = FirebaseFirestore.getInstance()
@@ -54,13 +57,14 @@ class NaviListFragment : Fragment() {
 
                 tvLevel.text="Level "+level
                 tvNickname.text=nickname
-                Glide.with(requireActivity()).load(sharedPreferences.getString("imgurl",null)).error(R.drawable.profile).into(civ)
+
             }else{
                 tvLevel.text="Level 0"
                 tvNickname.text="닉네임을 설정해주세요"
             }
         }
 
+        Glide.with(requireContext()).load(sharedPreferences.getString("imgurl",R.drawable.profile.toString())).error(R.drawable.profile).into(civ)
 
         recyclerView=rootView.findViewById(R.id.recycler_view)as RecyclerView
 
