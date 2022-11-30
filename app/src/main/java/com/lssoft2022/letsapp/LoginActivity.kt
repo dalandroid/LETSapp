@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.kakao.sdk.auth.model.OAuthToken
@@ -27,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var userRef:CollectionReference
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -39,14 +41,14 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btn1.setOnClickListener { clickEasyLogin() }
         binding.btn2.setOnClickListener { kakaologin() }
-        binding.btn3.setOnClickListener { clickButton() }
+        binding.btn3.setOnClickListener { googlelogin() }
 
         val keyHash:String = Utility.getKeyHash(this)
         Log.d("keyHash", keyHash)
 
     }
 
-    private fun clickButton(){
+    private fun googlelogin(){
         val intent:Intent=Intent(this@LoginActivity,MainActivity::class.java)
         startActivity(intent)
         finish()
