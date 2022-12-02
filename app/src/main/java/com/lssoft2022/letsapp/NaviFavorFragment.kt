@@ -17,16 +17,20 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import kotlinx.coroutines.*
+import kotlin.math.log
 
 class NaviFavorFragment : Fragment() {
 
     var items:MutableList<ApiDto> = ArrayList()
+    var itemsAll:MutableList<ApiDto> = ArrayList()
     var filteredItems:MutableList<ApiDto> = ArrayList()
+    var DBitems:MutableList<String> =ArrayList()
     lateinit var recyclerView:RecyclerView
     var categoryTitle:Array<String> = arrayOf("축구장", "풋살장", "족구장", "야구장", "테니스장", "농구장", "배구장", "경기장","운동장","체육관",
         "배드민턴장","탁구장","교육시설","수영장","골프장")
 
     lateinit var nickname:String
+    lateinit var email:String
 
     val firebaseFirestore=FirebaseFirestore.getInstance()
     val favorRef=firebaseFirestore.collection("favor")
@@ -39,14 +43,22 @@ class NaviFavorFragment : Fragment() {
 
         val sharedPreferences = requireActivity().applicationContext.getSharedPreferences("account", Context.MODE_PRIVATE)
         nickname= sharedPreferences.getString("nickname",null).toString()
+        email= sharedPreferences.getString("email",null).toString()
 
         recyclerView=rootView.findViewById(R.id.recycler_view)
 
+        searchDB()
         searchItem()
 
         return rootView
     }
 
+    private fun searchDB(){
+        favorRef.whereEqualTo(nickname,nickname).get().addOnSuccessListener { snapshot->
+            DBitems=snapshot.documents as MutableList<String>
+
+        }
+    }
 
 
     private fun searchItem(){
@@ -59,32 +71,29 @@ class NaviFavorFragment : Fragment() {
         val retrofitService=retrofit.create(ApiRetrofitService::class.java)
         filteredItems.clear()
 
-        for(category in 0..8){
+
+        for(category in 0..5){
             // retrofit 파싱
             retrofitService.getApiList(categoryTitle[category]).enqueue(object : Callback<ApiResponse> {
                 override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
 
                     if(response.body()!=null){
                         val apiResponse=response.body()
-
                         apiResponse?.apiResult?.ApiList?.let {
-                            items= apiResponse?.apiResult?.ApiList!!
-                            filteredItems= filteredItems.plus(items) as MutableList<ApiDto>
+                            runBlocking { items= apiResponse?.apiResult?.ApiList!! }
+                            itemsAll= itemsAll.plus(items) as MutableList<ApiDto>
+                            Log.d("ITEMS",itemsAll.size.toString())
                         }
                     }else{
                         Toast.makeText(requireContext(), "에러", Toast.LENGTH_SHORT).show()
                     }
                 }
-
                 override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
                     Toast.makeText(requireContext(), "${t.message}", Toast.LENGTH_SHORT).show()
                 }
-
             })
-
         }
-
-        }
+    }
 
 
 }

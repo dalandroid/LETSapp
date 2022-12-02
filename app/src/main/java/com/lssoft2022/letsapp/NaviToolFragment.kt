@@ -56,6 +56,7 @@ class NaviToolFragment : Fragment() {
             val intent:Intent=Intent(requireContext(),LoginActivity::class.java)
             editor.putString("imgurl",null)
             editor.putBoolean("islogin",false)
+            editor.putBoolean("kakaologin",false)
             editor.putString("email",null)
             editor.putString("nickname",null)
             editor.commit()

@@ -24,7 +24,7 @@ import com.lssoft2022.letsapp.databinding.RecyclerPartyItemBinding
 import java.io.Serializable
 import java.util.ArrayList
 
-class APIAdapter(val context: Context, var items: MutableList<ApiDto>, var category:String?=null, var sharedNickname:String?): RecyclerView.Adapter<APIAdapter.VH>() {
+class APIAdapter(val context: Context, var items: MutableList<ApiDto>, var category:String?=null, var sharedNickname:String?, var sharedEmail:String?): RecyclerView.Adapter<APIAdapter.VH>() {
 
     inner class VH constructor(itemView:View):RecyclerView.ViewHolder(itemView){
         val binding:RecyclerApilistItemBinding=RecyclerApilistItemBinding.bind(itemView)

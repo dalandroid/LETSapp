@@ -69,8 +69,32 @@ class LoginActivity : AppCompatActivity() {
         }else{
             val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
                 if(token != null){
-                    Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                    loadUserInfo() //사용자 정보 읽어오기
+                    UserApiClient.instance.me { user, error ->
+                        if (user != null) {
+                            val email = user.kakaoAccount?.email
+                            userRef.document(email!!).get().addOnSuccessListener { snapshot->
+                                if (snapshot.exists()){
+                                    var nickname=snapshot.get("nickname").toString()
+                                    val email= user.kakaoAccount?.email
+                                    val imgurl=user.kakaoAccount?.profile?.profileImageUrl
+
+                                    editor.putString("nickname",nickname)
+                                    editor.putString("email",email)
+                                    editor.putString("imgurl",imgurl)
+                                    editor.putBoolean("islogin",true)
+                                    editor.putBoolean("kakaologin",true)
+                                    editor.commit()
+
+                                    var userSet:UserSet=UserSet(nickname!!,email!!,"")
+                                    userRef.document(email).set(userSet)
+
+                                }else{
+                                    Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                                    loadUserInfo() //사용자 정보 읽어오기
+                                }
+                            }
+                        }
+                    }
                 }
             }
 

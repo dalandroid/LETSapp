@@ -33,6 +33,7 @@ class ListActivity : AppCompatActivity() {
     var sp3_isCheck:Boolean=false
 
     lateinit var nickname:String
+    lateinit var email:String
 
     lateinit var str1:String
     lateinit var str2:String
@@ -51,13 +52,14 @@ class ListActivity : AppCompatActivity() {
 
         val sharedPreferences=getSharedPreferences("account", MODE_PRIVATE)
         nickname =sharedPreferences.getString("nickname",null)!!
+        email=sharedPreferences.getString("email",null)!!
 
         val firebaseFirestore=FirebaseFirestore.getInstance()
         val favorRef=firebaseFirestore.collection("favor")
 
         searchItem()
 
-        binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category],nickname)
+        binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category],nickname,email)
 
 
 
@@ -193,7 +195,7 @@ class ListActivity : AppCompatActivity() {
 
                     apiResponse?.apiResult?.ApiList?.let {
                         list= apiResponse?.apiResult?.ApiList!!
-                        binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category],nickname)
+                        binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category],nickname,email)
                     }
 
                 }else{
@@ -273,12 +275,12 @@ class ListActivity : AppCompatActivity() {
                         list[i].state,list[i].x, list[i].y, list[i].site, list[i].tel))}}}
         // -- sp1, sp2, sp3 만 선택-- //
 
-        binding.recyclerView.adapter=APIAdapter(this@ListActivity,filter_items,categoryTitle[category],nickname)
+        binding.recyclerView.adapter=APIAdapter(this@ListActivity,filter_items,categoryTitle[category],nickname,email)
     }
 
     private fun changelist(){
         if(!sp1_isCheck && !sp2_isCheck && !sp3_isCheck){
-            binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category],nickname)
+            binding.recyclerView.adapter=APIAdapter(this@ListActivity,list,categoryTitle[category],nickname,email)
     }
 
     }
